@@ -1,0 +1,8 @@
+class Solution:
+    def numberOfChild(self, n: int, k: int) -> int:
+        x = k % (2 * (n - 1))
+
+        if x <= n - 1:
+            return x
+        else:
+            return 2 * (n - 1) - x

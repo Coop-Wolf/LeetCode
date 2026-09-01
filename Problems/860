@@ -1,0 +1,41 @@
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        
+        # Change to give back to customer
+        change = 0
+        bank = {10:0, 5:0}
+
+        # Get each customer one at a time
+        for bill in bills:
+
+            # Determine if there needs to be any change
+            change = bill - 5
+
+            # Determine if able to give that chnage to customer
+            if change:
+
+                # change from bank to give to customer
+                give_back = change
+
+                # Loop through bank
+                for key, value in bank.items():
+
+                    # go thorugh each dollar amount to attempt to make the change
+                    while give_back and key <= give_back and bank[key] >= 1:
+
+                        # decrement amount still needed to give back
+                        # decrement amount in bank
+                        give_back -= key
+                        bank[key] -= 1
+
+                # If there is remaning money needed to give back to customer, return false
+                if give_back:
+                    return False
+
+            if bill < 20:
+                # Add money to bank
+                bank[bill] += 1
+
+        return True
+
+
